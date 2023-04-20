@@ -150,7 +150,7 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
         sources = parsed_toml.get("tool", {}).get("poetry", {}).get("source", [])
 
         for source in sources:
-            if source.get("url", "").contains(".codeartifact."):
+            if ".codeartifact." in source.get("url", ""):
                 return True
 
         return False
