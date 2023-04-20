@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.11.1 (2023-04-20)
+### Fix
+* Change .contains to "in" ([`492b2e4`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/492b2e416ae4da64adb7e5376d9b0e135fb4b944))
+
 ## v0.11.0 (2023-04-20)
 ### Feature
 * Add env var, checks for pyproject_toml ([`8df5900`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/8df5900277b864d745847e5ac643bc004a10d98a))
