@@ -1,3 +1,4 @@
+import os
 import subprocess
 from pathlib import Path
 from typing import Optional
@@ -13,8 +14,11 @@ from poetry.console.commands.add import AddCommand
 from poetry.console.commands.install import InstallCommand
 from poetry.console.commands.self.self_command import SelfCommand
 from poetry.plugins.application_plugin import ApplicationPlugin
+from tomlkit import parse as parse_toml
 
 from poc_poetry_partifact_plugin.partifact.main import login
+
+CONFIG_PATH = "./pyproject.toml"
 
 
 class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
@@ -40,16 +44,20 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
             # Only run the plugin for install and add commands
             return
 
+        if not self._pyproject_toml_has_codeartifact():
+            # only run aws login if codeartifact is found in pyproject.toml
+            return
+
         # run a codeartifact login command
         try:
+            # env variable needed to solve https://github.com/python-poetry/poetry/issues/2692
+            os.environ["PYTHON_KEYRING_BACKEND"] = "keyring.backends.null.Keyring"
             login(repository="aws", profile="amino-shared", role=None)
             io.write_line("<fg=green>aws codeartifact successfully configured</info>")
-        except Exception as e:
-            import traceback
-
-            io.write_error_line(
-                f"<error>Failed to configure aws codeartifact: \n{traceback.format_exc()}</>"
-            )
+        except Exception as error:
+            io.write_error_line(f"<error>Failed to configure aws codeartifact: \n{error}</>")
+        finally:
+            os.unsetenv("PYTHON_KEYRING_BACKEND")
 
     def _handle_post_command(
         self, event: ConsoleTerminateEvent, event_name: str, dispatcher: EventDispatcher
@@ -130,3 +138,19 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
             return Path(result.decode().strip()) / ".git"
         except (subprocess.CalledProcessError, FileNotFoundError):
             return None
+
+    def _pyproject_toml_has_codeartifact(self) -> bool:
+        """Determine if the pyproject.toml file has codeartifact in it."""
+
+        with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+            toml_contents = f.read()
+
+        parsed_toml = parse_toml(toml_contents)
+
+        sources = parsed_toml.get("tool", {}).get("poetry", {}).get("source", [])
+
+        for source in sources:
+            if source.get("url", "").contains(".codeartifact."):
+                return True
+
+        return False
