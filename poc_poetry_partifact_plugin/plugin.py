@@ -42,7 +42,8 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
             return
 
         # run a codeartifact login command
-        login(repository="aws", profile="amino-shared")
+        raise RuntimeError("hey thats enough")
+        # login(repository="aws", profile="amino-shared")
 
         if not self._is_pre_commit_package_installed():
             return
