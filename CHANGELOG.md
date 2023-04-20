@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.0 (2023-04-20)
+### Feature
+* Try to upload again ([`0c59325`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/0c5932549565c73cbd5e67e96f3afa4203745693))
+
 ## v0.3.0 (2023-04-20)
 ### Feature
 * Intentionally break to verify things are working... ([`11da765`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/11da7653c39c163efb4c81d9b6e051d7c92a52b3))
