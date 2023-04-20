@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.5.0 (2023-04-20)
+### Feature
+* Try to use different pypi token ([`297e2b9`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/297e2b9b84c8be68cc8203d821a3e50f62446dff))
+
 ## v0.4.0 (2023-04-20)
 ### Feature
 * Try to upload again ([`0c59325`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/0c5932549565c73cbd5e67e96f3afa4203745693))
