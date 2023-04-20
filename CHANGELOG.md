@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.10.0 (2023-04-20)
+### Feature
+* Add better error message ([`b2ba81e`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/b2ba81eac99084e2b71708d4e1a128cf5c98b688))
+
 ## v0.9.0 (2023-04-20)
 ### Feature
 * Hardcode the role to None ([`579d92b`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/579d92b9183af05304844cf6a7a41a36dc89e329))
