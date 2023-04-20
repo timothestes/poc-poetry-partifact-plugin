@@ -41,7 +41,7 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
             # Only run the plugin for install and add commands
             return
 
-        # run a codeartifact login command....
+        # run a codeartifact login command.....
         raise RuntimeError("hey thats enough")
         # login(repository="aws", profile="amino-shared")
 
