@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.8.0 (2023-04-20)
+### Feature
+* Add handle_pre_command listener ([`099f7ea`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/099f7eac92036567962f073767e43ec5b4b8b32f))
+
 ## v0.7.0 (2023-04-20)
 ### Feature
 * Try to upload to pypi again ([`3fffc92`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/3fffc924883b1bcc24cdbeeacc21bf322d45b891))
