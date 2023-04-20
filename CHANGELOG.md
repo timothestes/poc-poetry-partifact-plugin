@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.11.0 (2023-04-20)
+### Feature
+* Add env var, checks for pyproject_toml ([`8df5900`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/8df5900277b864d745847e5ac643bc004a10d98a))
+
 ## v0.10.0 (2023-04-20)
 ### Feature
 * Add better error message ([`b2ba81e`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/b2ba81eac99084e2b71708d4e1a128cf5c98b688))
