@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.0 (2023-04-20)
+### Feature
+* Intentionally break to verify things are working... ([`11da765`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/11da7653c39c163efb4c81d9b6e051d7c92a52b3))
+
 ## v0.2.0 (2023-04-20)
 ### Feature
 * Add partifact ([`a1ec6b8`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/a1ec6b864ac7edf03a3c51b53dfdc34c865dde3d))
