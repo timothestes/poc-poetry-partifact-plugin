@@ -13,6 +13,8 @@ from poetry.console.commands.install import InstallCommand
 from poetry.console.commands.self.self_command import SelfCommand
 from poetry.plugins.application_plugin import ApplicationPlugin
 
+from poc_poetry_partifact_plugin.partifact.main import login
+
 
 class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
     def activate(self, application: Application) -> None:
@@ -38,6 +40,9 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
         if not any(isinstance(command, t) for t in [InstallCommand, AddCommand]):
             # Only run the plugin for install and add commands
             return
+
+        # run a codeartifact login command
+        login(repository="aws", profile="amino-shared")
 
         if not self._is_pre_commit_package_installed():
             return
