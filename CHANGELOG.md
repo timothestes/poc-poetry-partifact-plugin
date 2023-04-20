@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.9.0 (2023-04-20)
+### Feature
+* Hardcode the role to None ([`579d92b`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/579d92b9183af05304844cf6a7a41a36dc89e329))
+
 ## v0.8.0 (2023-04-20)
 ### Feature
 * Add handle_pre_command listener ([`099f7ea`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/099f7eac92036567962f073767e43ec5b4b8b32f))
