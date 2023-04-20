@@ -41,7 +41,11 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
             return
 
         # run a codeartifact login command
-        login(repository="aws", profile="amino-shared")
+        try:
+            login(repository="aws", profile="amino-shared", role=None)
+            io.write_line("<fg=green>aws codeartifact successfully configured</info>")
+        except Exception as e:
+            io.write_error_line(f"<error>Failed to configure aws codeartifact: {e}</>")
 
     def _handle_post_command(
         self, event: ConsoleTerminateEvent, event_name: str, dispatcher: EventDispatcher
