@@ -2,7 +2,8 @@ import subprocess
 from pathlib import Path
 from typing import Optional
 
-from cleo.events.console_events import TERMINATE
+from cleo.events.console_command_event import ConsoleCommandEvent
+from cleo.events.console_events import COMMAND, TERMINATE
 from cleo.events.console_terminate_event import ConsoleTerminateEvent
 from cleo.events.event_dispatcher import EventDispatcher
 from cleo.io.io import IO
@@ -19,12 +20,35 @@ from poc_poetry_partifact_plugin.partifact.main import login
 class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
     def activate(self, application: Application) -> None:
         application.event_dispatcher.add_listener(TERMINATE, self._handle_post_command)
+        application.event_dispatcher.add_listener(COMMAND, self._handle_pre_command)
+
+    def _handle_pre_command(
+        self, event: ConsoleCommandEvent, event_name: str, dispatcher: EventDispatcher
+    ) -> None:
+        """Run partifact.login before any Install or Add Commands"""
+        command = event.command
+        io = event.io
+
+        if isinstance(command, SelfCommand):
+            io.write_line(
+                "<info>Poetry pre-commit plugin does not run for 'self' command.</info>",
+                verbosity=Verbosity.DEBUG,
+            )
+            return
+
+        if not any(isinstance(command, t) for t in [InstallCommand, AddCommand]):
+            # Only run the plugin for install and add commands
+            return
+
+        # run a codeartifact login command
+        login(repository="aws", profile="amino-shared")
 
     def _handle_post_command(
         self, event: ConsoleTerminateEvent, event_name: str, dispatcher: EventDispatcher
     ) -> None:
         if event.exit_code != 0:
             # The command failed, so the plugin shouldn't do anything
+            # if the event was a "HTTPSConnectionPool" error, then try to login
             return
 
         command = event.command
@@ -40,10 +64,6 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
         if not any(isinstance(command, t) for t in [InstallCommand, AddCommand]):
             # Only run the plugin for install and add commands
             return
-
-        # run a codeartifact login command.....
-        raise RuntimeError("hey thats enough")
-        # login(repository="aws", profile="amino-shared")
 
         if not self._is_pre_commit_package_installed():
             return
