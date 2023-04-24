@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.13.0 (2023-04-24)
+### Feature
+* Read repository name dynamically from pyproject.toml ([`92dbc32`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/92dbc32e181d324aae671970e717a76eda473337))
+
 ## v0.12.0 (2023-04-24)
 ### Feature
 * Remove pre-commit hooks, clean up plugin.py, add LICENSE ([`92e1214`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/92e1214fcdc059570ab8641a6da077e631102660))
