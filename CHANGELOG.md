@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.12.0 (2023-04-24)
+### Feature
+* Remove pre-commit hooks, clean up plugin.py, add LICENSE ([`92e1214`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/92e1214fcdc059570ab8641a6da077e631102660))
+
 ## v0.11.1 (2023-04-20)
 ### Fix
 * Change .contains to "in" ([`492b2e4`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/492b2e416ae4da64adb7e5376d9b0e135fb4b944))
