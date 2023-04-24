@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.14.1 (2023-04-24)
+### Fix
+* Remove imports, fix text output ([`f69cee5`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/f69cee53fa413f7054d111fd475f95884feb64dd))
+
 ## v0.14.0 (2023-04-24)
 ### Feature
 * Add unit tests, make errors more explicit ([`a7cedd8`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/a7cedd85ef98c4f6e88d799470cb2ac9aef40de5))
