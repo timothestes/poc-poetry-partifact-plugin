@@ -10,6 +10,7 @@ from poetry.console.commands.install import InstallCommand
 from poetry.console.commands.self.self_command import SelfCommand
 from poetry.plugins.application_plugin import ApplicationPlugin
 from tomlkit import parse as parse_toml
+from tomlkit.exceptions import TOMLKitError
 
 from poc_poetry_partifact_plugin.partifact.main import login
 
@@ -49,7 +50,7 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
         try:
             # env variable needed to solve https://github.com/python-poetry/poetry/issues/2692
             os.environ["PYTHON_KEYRING_BACKEND"] = "keyring.backends.null.Keyring"
-            login(repository="aws", profile="amino-shared", role=None)
+            login(repository=self._get_repository(), profile=self._get_repository(), role=None)
             io.write_line("<fg=green>aws codeartifact successfully configured</info>")
         except Exception as error:
             io.write_error_line(f"<error>Failed to configure aws codeartifact: \n{error}</>")
@@ -72,3 +73,26 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
                 return True
 
         return False
+
+    def _get_repository(self) -> str:
+        """Get the repository name from a pyproject.toml file."""
+        CONFIG_PATH = "./pyproject.toml"
+        try:
+            with open(CONFIG_PATH, "r") as f:
+                config = parse_toml(f.read())
+        except FileNotFoundError:
+            raise RuntimeError("no pyproject.toml found")
+        except TOMLKitError:
+            raise RuntimeError("invalid pyproject.toml")
+
+        repo_names = []
+        sources = config["tool"]["poetry"]["source"]
+
+        for source in sources:
+            if source.get("name"):
+                repo_names.append(source["name"])
+
+        if not repo_names:
+            raise RuntimeError("tool.poetry.source requires a 'name' field")
+
+        return repo_names[0]
