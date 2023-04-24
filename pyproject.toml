@@ -41,3 +41,7 @@ profile = "black"
 
 [tool.poetry.plugins."poetry.application.plugin"]
 poc-poetry-partifact-plugin = "poc_poetry_partifact_plugin.plugin:PocPartifactPlugin"
+
+[virtualenvs]
+create = true
+in-project = true
