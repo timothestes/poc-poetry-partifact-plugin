@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.14.0 (2023-04-24)
+### Feature
+* Add unit tests, make errors more explicit ([`a7cedd8`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/a7cedd85ef98c4f6e88d799470cb2ac9aef40de5))
+
 ## v0.13.0 (2023-04-24)
 ### Feature
 * Read repository name dynamically from pyproject.toml ([`92dbc32`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/92dbc32e181d324aae671970e717a76eda473337))
