@@ -4,11 +4,9 @@ from cleo.events.console_command_event import ConsoleCommandEvent
 from cleo.events.console_events import COMMAND
 from cleo.events.event_dispatcher import EventDispatcher
 from cleo.io.io import IO
-from cleo.io.outputs.output import Verbosity
 from poetry.console.application import Application
 from poetry.console.commands.add import AddCommand
 from poetry.console.commands.install import InstallCommand
-from poetry.console.commands.self.self_command import SelfCommand
 from poetry.plugins.application_plugin import ApplicationPlugin
 from tomlkit import parse as parse_toml
 from tomlkit.exceptions import TOMLKitError
@@ -22,7 +20,7 @@ CONFIG_PATH = "./pyproject.toml"
 
 
 class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
-    name = "Poetry PocPartifactPlugin plugin"
+    name = "PocPartifactPlugin plugin"
 
     def activate(self, application: Application) -> None:
         application.event_dispatcher.add_listener(COMMAND, self._handle_pre_command)
@@ -99,11 +97,11 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
             repository = self._get_repository(parsed_toml)
             login(repository=repository, profile=repository, role=None)
             cleo_io.write_line(
-                f"<fg=green>{self.name} successfully configured AWS CodeArtifact auth for{repository}</info>"
+                f"<fg=green>{self.name} successfully configured AWS CodeArtifact for {repository}</info>"
             )
         except Exception as error:
             cleo_io.write_error_line(
-                f"<error>{self.name} failed to configure AWS CodeArtifact auth for: \n{error}</>"
+                f"<error>{self.name} failed to configure AWS CodeArtifact for: \n{error}</>"
             )
         finally:
             # not sure if having this set to something will cause problems down the line
