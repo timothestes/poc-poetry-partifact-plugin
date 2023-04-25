@@ -4,7 +4,8 @@ from cleo.events.console_command_event import ConsoleCommandEvent
 from cleo.events.console_events import COMMAND
 from cleo.events.event_dispatcher import EventDispatcher
 from cleo.io.io import IO
-from partifact.main import login
+from partifact.auth_token import get_token
+from partifact.config import Configuration
 from poetry.console.application import Application
 from poetry.console.commands.add import AddCommand
 from poetry.console.commands.install import InstallCommand
@@ -89,9 +90,11 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
         """Try to Run partifact.login command."""
         try:
             # env variable needed to solve https://github.com/python-poetry/poetry/issues/2692
-            os.environ["PYTHON_KEYRING_BACKEND"] = "keyring.backends.null.Keyring"
+            # os.environ["PYTHON_KEYRING_BACKEND"] = "keyring.backends.null.Keyring"
             repository = self._get_repository(parsed_toml)
-            login(repository=repository, profile=repository, role=None)
+            config = Configuration.load(repository, profile=repository, role=None)
+            os.environ[f"POETRY_HTTP_BASIC_{repository}_PASSWORD"] = get_token(config)
+            os.environ[f"POETRY_HTTP_BASIC_{repository}_USERNAME"] = "aws"
             cleo_io.write_line(
                 f"<fg=green>{self.name} successfully configured AWS CodeArtifact for {repository}</info>"
             )
@@ -100,6 +103,7 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
                 f"<error>{self.name} failed to configure AWS CodeArtifact for: \n{error}</>"
             )
         finally:
+            pass
             # not sure if having this set to something will cause problems down the line
             # so unsetting it for now...
-            os.unsetenv("PYTHON_KEYRING_BACKEND")
+            # os.unsetenv("PYTHON_KEYRING_BACKEND")
