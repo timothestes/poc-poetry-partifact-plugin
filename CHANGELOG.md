@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.15.2 (2023-04-25)
+### Fix
+* Try using allcaps in env variables ([`3bae84a`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/3bae84aff3f31d5bf59f9091297792f16f4f227f))
+
 ## v0.15.1 (2023-04-25)
 ### Fix
 * Change "role" to "role_name" ([`2bdb0f1`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/2bdb0f15a7a39e6307880de425b1c29a898093b4))

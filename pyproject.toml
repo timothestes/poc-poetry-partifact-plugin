@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "poc-poetry-partifact-plugin"
-version = "0.15.1"
+version = "0.15.2"
 description = "A POC poetry plugin that configure partifact"
 authors = ["timothestes <timothestes@gmail.com>"]
 readme = "README.md"
