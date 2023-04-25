@@ -1,6 +1,7 @@
 ## POC-POETRY-PARTIFACT-PLUGIN
 
-This project is a poetry plugin that wraps the `poetry add/install` commands.
+This project is a poetry plugin that wraps the `poetry add/install` commands and adds some logic
+that will authenticate to AWS CodeArtifact under the hood.
 
 Before any poetry `add` or `install` commands are run, this plugin will check the `pyproject.toml` file
 for any codeartifact sources.
@@ -44,3 +45,7 @@ Once the plugin has gotten your repository url and the name of the AWS profile y
 
 If this request is successful, a short-lived token will be returned that will grant temporary access.
 This token is set as a [poetry environment variable](https://python-poetry.org/docs/configuration/#using-environment-variables) and allows poetry to seamlessly authenticate to the repository.
+
+## Dependencies
+
+* [partifact](https://github.com/Validus-Risk-Management/partifact)
