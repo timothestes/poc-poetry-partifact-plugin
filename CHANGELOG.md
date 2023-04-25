@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.16.0 (2023-04-25)
+### Feature
+* Add Readme, don't run command on SelfCommands ([`7f9aae4`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/7f9aae4f480b3e9c579adef6206cde1c17625e64))
+
 ## v0.15.4 (2023-04-25)
 ### Fix
 * Change function and variables names to be less confusing ([`1731381`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/1731381c4a564d76aeb8c42fcdc08d0058f2dba7))
