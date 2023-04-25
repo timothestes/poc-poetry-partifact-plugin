@@ -93,8 +93,12 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
             # os.environ["PYTHON_KEYRING_BACKEND"] = "keyring.backends.null.Keyring"
             repository = self._get_repository(parsed_toml)
             config = Configuration.load(repository, profile=repository, role_name=None)
-            os.environ[f"POETRY_HTTP_BASIC_{repository.upper()}_PASSWORD"] = get_token(config)
-            os.environ[f"POETRY_HTTP_BASIC_{repository.upper()}_USERNAME"] = "aws"
+            os.environ[
+                f"POETRY_HTTP_BASIC_{repository.upper().replace('-', '_')}_PASSWORD"
+            ] = get_token(config)
+            os.environ[
+                f"POETRY_HTTP_BASIC_{repository.upper().replace('-', '_')}_USERNAME"
+            ] = "aws"
             cleo_io.write_line(
                 f"<fg=green>{self.name} successfully configured AWS CodeArtifact for {repository}</info>"
             )
