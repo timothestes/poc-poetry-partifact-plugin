@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v0.16.1 (2023-04-25)
+### Fix
+* Try to use Configuration.load() without role_name ([`b4a4d31`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/b4a4d311465ea9d8cf082251bfda9084343576b5))
+
+### Documentation
+* Tweak readme ([`2e08365`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/2e083654099427ea50d77ec6518ffe37737ee4d2))
+
 ## v0.16.0 (2023-04-25)
 ### Feature
 * Add Readme, don't run command on SelfCommands ([`7f9aae4`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/7f9aae4f480b3e9c579adef6206cde1c17625e64))
