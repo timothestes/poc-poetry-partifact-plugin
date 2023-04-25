@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.15.3 (2023-04-25)
+### Fix
+* Try to replace dash with underscore ([`bee9603`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/bee9603654d94f050128dafb1a4a5ce1ca02cd01))
+
 ## v0.15.2 (2023-04-25)
 ### Fix
 * Try using allcaps in env variables ([`3bae84a`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/3bae84aff3f31d5bf59f9091297792f16f4f227f))
