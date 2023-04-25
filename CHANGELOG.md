@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.15.1 (2023-04-25)
+### Fix
+* Change "role" to "role_name" ([`2bdb0f1`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/2bdb0f15a7a39e6307880de425b1c29a898093b4))
+
 ## v0.15.0 (2023-04-25)
 ### Feature
 * Try to login using environment variables ([`b5720f6`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/b5720f661657a61db4344430f9fd81f08cb31d93))
