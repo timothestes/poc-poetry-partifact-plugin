@@ -9,6 +9,7 @@ from partifact.config import Configuration
 from poetry.console.application import Application
 from poetry.console.commands.add import AddCommand
 from poetry.console.commands.install import InstallCommand
+from poetry.console.commands.self.self_command import SelfCommand
 from poetry.plugins.application_plugin import ApplicationPlugin
 from tomlkit import parse as parse_toml
 from tomlkit.exceptions import TOMLKitError
@@ -28,6 +29,10 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
         """Run partifact.login before any Install or Add Commands"""
         command = event.command
         cleo_io = event.io
+
+        if isinstance(command, SelfCommand):
+            # don't run the plugin for self commands
+            return
 
         if not any(isinstance(command, t) for t in [InstallCommand, AddCommand]):
             # Only run the plugin for install and add commands
@@ -73,17 +78,14 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
 
     def _get_profile_name(self, parsed_toml: dict) -> str:
         """Get the AWS profile name from the pyproject.toml file."""
-        repo_names = []
-        # if we are getting this far, we can assume at least one source exists...
+        # if we are getting this far, we can assume at least one codeartifact source exists
         sources = self._get_sources(parsed_toml=parsed_toml)
         for source in sources:
-            if source.get("name"):
-                repo_names.append(source["name"])
+            if ".codeartifact." in source.get("url", "") and source.get("name"):
+                return source["name"]
 
-        if not repo_names:
-            raise RuntimeError("tool.poetry.source requires a 'name' field")
-
-        return repo_names[0]
+        # if we get to here, that means the user didn't specify the name field
+        raise RuntimeError("Could not find a valid tool.poetry.source.name field")
 
     def _setup_aws_auth(self, cleo_io: IO, parsed_toml: dict) -> None:
         """Try to set poetry environment variables used for authentication."""
