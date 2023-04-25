@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v0.15.0 (2023-04-25)
+### Feature
+* Try to login using environment variables ([`b5720f6`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/b5720f661657a61db4344430f9fd81f08cb31d93))
+* Add partifact library, remove local partifact ([`c7fc222`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/c7fc22220f7a9319d0605395e0c2b1d282987f07))
+
+### Fix
+* Revert changes to version ([`371fe9d`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/371fe9dfc621684604e30b33dd4965722152120c))
+
 ## v0.14.1 (2023-04-24)
 ### Fix
 * Remove imports, fix text output ([`f69cee5`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/f69cee53fa413f7054d111fd475f95884feb64dd))
