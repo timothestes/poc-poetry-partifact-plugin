@@ -92,7 +92,12 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
         try:
             profile_name = self._get_profile_name(parsed_toml)
             formatted_profile_name = profile_name.upper().replace("-", "_")
-            config = Configuration.load(profile_name, profile=profile_name, role_name=None)
+            # TODO: figure out if local
+            # if remote:  # CI environment variable
+            # config = Configuration.load(profile_name, profile=None, role_name="my-role")
+            # else:
+            # config = Configuration.load(profile_name, profile=profile_name, role_name=None)
+            config = Configuration.load(profile_name, profile=profile_name)
 
             # setting these env variables will allow poetry to connect to codeartifact
             # https://python-poetry.org/docs/configuration/#using-environment-variables
