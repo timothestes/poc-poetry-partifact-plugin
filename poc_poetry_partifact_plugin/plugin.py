@@ -45,8 +45,7 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
             # only run aws login if codeartifact is found in pyproject.toml
             return
 
-        # run aws auth
-        self._run_codeartifact_login(cleo_io=cleo_io, parsed_toml=parsed_toml)
+        self._setup_aws_auth(cleo_io=cleo_io, parsed_toml=parsed_toml)
 
     def _get_sources(self, parsed_toml: dict) -> list:
         """Return a list of all tool.poetry.source's in the parsed toml."""
@@ -72,8 +71,8 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
 
         return False
 
-    def _get_repository(self, parsed_toml: dict) -> str:
-        """Get the first repository name from a pyproject.toml file."""
+    def _get_profile_name(self, parsed_toml: dict) -> str:
+        """Get the AWS profile name from the pyproject.toml file."""
         repo_names = []
         # if we are getting this far, we can assume at least one source exists...
         sources = self._get_sources(parsed_toml=parsed_toml)
@@ -86,28 +85,22 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
 
         return repo_names[0]
 
-    def _run_codeartifact_login(self, cleo_io: IO, parsed_toml: dict) -> None:
-        """Try to Run partifact.login command."""
+    def _setup_aws_auth(self, cleo_io: IO, parsed_toml: dict) -> None:
+        """Try to set poetry environment variables used for authentication."""
         try:
-            # env variable needed to solve https://github.com/python-poetry/poetry/issues/2692
-            # os.environ["PYTHON_KEYRING_BACKEND"] = "keyring.backends.null.Keyring"
-            repository = self._get_repository(parsed_toml)
-            config = Configuration.load(repository, profile=repository, role_name=None)
-            os.environ[
-                f"POETRY_HTTP_BASIC_{repository.upper().replace('-', '_')}_PASSWORD"
-            ] = get_token(config)
-            os.environ[
-                f"POETRY_HTTP_BASIC_{repository.upper().replace('-', '_')}_USERNAME"
-            ] = "aws"
+            profile_name = self._get_profile_name(parsed_toml)
+            formatted_profile_name = profile_name.upper().replace("-", "_")
+            config = Configuration.load(profile_name, profile=profile_name, role_name=None)
+
+            # setting these env variables will allow poetry to connect to codeartifact
+            # https://python-poetry.org/docs/configuration/#using-environment-variables
+            os.environ[f"POETRY_HTTP_BASIC_{formatted_profile_name}_PASSWORD"] = get_token(config)
+            os.environ[f"POETRY_HTTP_BASIC_{formatted_profile_name}_USERNAME"] = "aws"
+
             cleo_io.write_line(
-                f"<fg=green>{self.name} successfully configured AWS CodeArtifact for {repository}</info>"
+                f"<fg=green>{self.name} successfully configured AWS CodeArtifact for {profile_name}</info>"
             )
         except Exception as error:
             cleo_io.write_error_line(
-                f"<error>{self.name} failed to configure AWS CodeArtifact for {repository}: \n\t{error}</>"
+                f"<error>{self.name} failed to configure AWS CodeArtifact for {profile_name}: \n\t{error}</>"
             )
-        finally:
-            pass
-            # not sure if having this set to something will cause problems down the line
-            # so unsetting it for now...
-            # os.unsetenv("PYTHON_KEYRING_BACKEND")
