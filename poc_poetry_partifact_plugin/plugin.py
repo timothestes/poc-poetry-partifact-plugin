@@ -4,17 +4,13 @@ from cleo.events.console_command_event import ConsoleCommandEvent
 from cleo.events.console_events import COMMAND
 from cleo.events.event_dispatcher import EventDispatcher
 from cleo.io.io import IO
+from partifact.main import login
 from poetry.console.application import Application
 from poetry.console.commands.add import AddCommand
 from poetry.console.commands.install import InstallCommand
 from poetry.plugins.application_plugin import ApplicationPlugin
 from tomlkit import parse as parse_toml
 from tomlkit.exceptions import TOMLKitError
-
-from poc_poetry_partifact_plugin.partifact.main import login
-
-# planning to use partifact once issue is resolved https://github.com/Validus-Risk-Management/partifact/issues/2
-# from partifact.main import login
 
 CONFIG_PATH = "./pyproject.toml"
 

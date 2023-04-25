@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "poc-poetry-partifact-plugin"
-version = "0.14.1"
+version = "0.15.1"
 description = "A POC poetry plugin that configure partifact"
 authors = ["timothestes <timothestes@gmail.com>"]
 readme = "README.md"
@@ -10,11 +10,12 @@ packages = [
 homepage = "https://github.com/timothestes/poc-poetry-partifact-plugin"
 
 [tool.poetry.dependencies]
-python = ">=3.7,<4.0"
+python = ">=3.8,<4.0"
 parse = "^1.19.0"
 tomlkit = "^0.11.7"
 typer = "^0.7.0"
 boto3 = "^1.26.116"
+partifact = "^0.2.0"
 
 [tool.poetry.group.dev.dependencies]
 twine = "^4.0"
