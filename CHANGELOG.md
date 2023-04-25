@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.15.4 (2023-04-25)
+### Fix
+* Change function and variables names to be less confusing ([`1731381`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/1731381c4a564d76aeb8c42fcdc08d0058f2dba7))
+
 ## v0.15.3 (2023-04-25)
 ### Fix
 * Try to replace dash with underscore ([`bee9603`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/bee9603654d94f050128dafb1a4a5ce1ca02cd01))
