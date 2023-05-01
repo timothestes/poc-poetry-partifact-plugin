@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.18.0 (2023-05-01)
+### Feature
+* Add update command to poetry wrapper ([`2e4d610`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/2e4d610e0c5aaae64212ddb5a80f8ec8ed7a55e8))
+
 ## v0.17.0 (2023-05-01)
 ### Feature
 * Add aws config to lock command ([`53ed991`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/53ed991507136678cd0ff152c48584e2f5a5ff67))
