@@ -11,6 +11,7 @@ from poetry.console.commands.add import AddCommand
 from poetry.console.commands.install import InstallCommand
 from poetry.console.commands.lock import LockCommand
 from poetry.console.commands.self.self_command import SelfCommand
+from poetry.console.commands.update import UpdateCommand
 from poetry.plugins.application_plugin import ApplicationPlugin
 from tomlkit import parse as parse_toml
 from tomlkit.exceptions import TOMLKitError
@@ -35,8 +36,11 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
             # don't run the plugin for self commands
             return
 
-        if not any(isinstance(command, t) for t in [InstallCommand, AddCommand, LockCommand]):
-            # Only run the plugin for install and add commands
+        if not any(
+            isinstance(command, t)
+            for t in [InstallCommand, AddCommand, LockCommand, UpdateCommand]
+        ):
+            # Only run the plugin for install, lock, update and add commands
             return
 
         try:
