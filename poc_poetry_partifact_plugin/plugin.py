@@ -9,6 +9,7 @@ from partifact.config import Configuration
 from poetry.console.application import Application
 from poetry.console.commands.add import AddCommand
 from poetry.console.commands.install import InstallCommand
+from poetry.console.commands.lock import LockCommand
 from poetry.console.commands.self.self_command import SelfCommand
 from poetry.plugins.application_plugin import ApplicationPlugin
 from tomlkit import parse as parse_toml
@@ -26,7 +27,7 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
     def _handle_pre_command(
         self, event: ConsoleCommandEvent, event_name: str, dispatcher: EventDispatcher
     ) -> None:
-        """Run partifact.login before any Install or Add Commands"""
+        """Check to authenticate to AWS CodeArtifact before any Install or Add Commands"""
         command = event.command
         cleo_io = event.io
 
@@ -34,7 +35,7 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
             # don't run the plugin for self commands
             return
 
-        if not any(isinstance(command, t) for t in [InstallCommand, AddCommand]):
+        if not any(isinstance(command, t) for t in [InstallCommand, AddCommand, LockCommand]):
             # Only run the plugin for install and add commands
             return
 
@@ -92,11 +93,7 @@ class PocPartifactPlugin(ApplicationPlugin):  # type: ignore
         try:
             profile_name = self._get_profile_name(parsed_toml)
             formatted_profile_name = profile_name.upper().replace("-", "_")
-            # TODO: figure out if local
-            # if remote:  # CI environment variable
-            # config = Configuration.load(profile_name, profile=None, role_name="my-role")
-            # else:
-            # config = Configuration.load(profile_name, profile=profile_name, role_name=None)
+            # TODO: figure out if local (CI variable?)
             config = Configuration.load(profile_name, profile=profile_name)
 
             # setting these env variables will allow poetry to connect to codeartifact
