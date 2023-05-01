@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.17.0 (2023-05-01)
+### Feature
+* Add aws config to lock command ([`53ed991`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/53ed991507136678cd0ff152c48584e2f5a5ff67))
+
 ## v0.16.1 (2023-04-25)
 ### Fix
 * Try to use Configuration.load() without role_name ([`b4a4d31`](https://github.com/timothestes/poc-poetry-partifact-plugin/commit/b4a4d311465ea9d8cf082251bfda9084343576b5))
